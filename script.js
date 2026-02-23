@@ -154,3 +154,50 @@ function changeTab(tabName) {
 }
 
 
+
+
+document.querySelectorAll(".tab-btn").forEach(function(btn) {
+    btn.addEventListener("click", function() {
+    var tabName = btn.getAttribute("data-tab");
+    changeTab(tabName);
+    });
+});
+
+
+document.addEventListener("click", function(e) {
+    var clickedButton = e.target.closest("button");
+    if (!clickedButton) return;
+
+    var action = clickedButton.getAttribute("data-action");
+    var id = clickedButton.getAttribute("data-id");
+    if (!action || !id) return;
+
+    // find job
+    var jobIndex = -1;
+    for (var i = 0; i < jobs.length; i++) {
+    if (jobs[i].id === id) {
+        jobIndex = i;
+        break;
+    }
+    }
+    if (jobIndex === -1) return;
+
+    // handle actions
+    if (action === "delete") {
+    jobs.splice(jobIndex, 1);
+    updateDashboardAndList();
+    }
+
+    if (action === "interview") {
+    jobs[jobIndex].status = "interview";
+    //changeTab("interview"); 
+    }
+
+    if (action === "rejected") {
+    jobs[jobIndex].status = "rejected";
+    //changeTab("rejected"); 
+    }
+});
+
+
+changeTab("all");
