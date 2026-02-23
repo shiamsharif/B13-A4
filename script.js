@@ -10,6 +10,21 @@ var jobs = [
     { id: "j8", companyName: "OpsPilot", position: "DevOps Engineer", location: "Berlin, DE", type: "Full-time", salary: "€85,000 - €120,000", description: "Improve CI/CD pipelines and help teams deploy safely and faster.", status: "none" }
 ];
 
+// DOM Elements
+var pageSubtitle = document.getElementById("pageSubtitle");
+var cardsWrap = document.getElementById("cardsWrap");
+var emptyState = document.getElementById("emptyState");
+
+var countTotal = document.getElementById("countTotal");
+var countInterview = document.getElementById("countInterview");
+var countRejected = document.getElementById("countRejected");
+var tabCount = document.getElementById("tabCount");
+
+// Using getElementsByClassName (returns HTMLCollection)
+var tabButtons = document.getElementsByClassName("tab-btn");
+
+
+var activeTab = "all"; // all | interview | rejected
 
 
 
