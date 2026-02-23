@@ -50,6 +50,15 @@ function getFilteredJobs() {
     return result;
 }
 
+function statusBadge(status) {
+    if (status === "interview") {
+    return `<span class="inline-flex items-center rounded-md bg-emerald-50 px-2 py-0.5 text-[10px] font-semibold text-emerald-700 ring-1 ring-emerald-100">INTERVIEW</span>`;
+    }
+    if (status === "rejected") {
+    return `<span class="inline-flex items-center rounded-md bg-rose-50 px-2 py-0.5 text-[10px] font-semibold text-rose-700 ring-1 ring-rose-100">REJECTED</span>`;
+    }
+    return `<span class="inline-flex items-center rounded-md bg-slate-50 px-2 py-0.5 text-[10px] font-semibold text-slate-600 ring-1 ring-slate-100">NOT APPLIED</span>`;
+}
 
 
 
