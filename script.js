@@ -60,6 +60,50 @@ function statusBadge(status) {
     return `<span class="inline-flex items-center rounded-md bg-slate-50 px-2 py-0.5 text-[10px] font-semibold text-slate-600 ring-1 ring-slate-100">NOT APPLIED</span>`;
 }
 
+function makeCard(job) {
+    var interviewActive = job.status === "interview";
+    var rejectedActive = job.status === "rejected";
+
+    return `
+    <article class="rounded-xl border border-slate-100 bg-white p-4 shadow-sm">
+        <div class="flex items-start justify-between gap-3">
+        <div class="min-w-0">
+            <h4 class="truncate test-lg font-semibold text-slate-900">${job.companyName}</h4>
+            <p class="mt-0.5 test-base font-medium text-slate-600">${job.position}</p>
+
+            <div class="mt-2 flex flex-wrap items-center gap-2 text-[11px] text-slate-500">
+            <span class="inline-flex items-center rounded-md bg-slate-50 px-2 py-0.5 ring-1 ring-slate-100">${job.location}</span>
+            <span class="inline-flex items-center rounded-md bg-slate-50 px-2 py-0.5 ring-1 ring-slate-100">${job.type}</span>
+            <span class="inline-flex items-center rounded-md bg-slate-50 px-2 py-0.5 ring-1 ring-slate-100">${job.salary}</span>
+            </div>
+
+            <div class="mt-3">${statusBadge(job.status)}</div>
+
+            <p class="mt-3 test-base leading-relaxed text-slate-600">${job.description}</p>
+
+            <div class="mt-4 flex flex-wrap gap-2">
+            <button class="action-btn rounded-md border px-3 py-1.5 test-base font-semibold
+                ${interviewActive ? "border-emerald-200 bg-emerald-50 text-emerald-700" : "border-slate-200 bg-white text-slate-700 hover:bg-slate-50"}"
+                data-action="interview" data-id="${job.id}">
+                Interview
+            </button>
+
+            <button class="action-btn rounded-md border px-3 py-1.5 test-base font-semibold
+                ${rejectedActive ? "border-rose-200 bg-rose-50 text-rose-700" : "border-slate-200 bg-white text-slate-700 hover:bg-slate-50"}"
+                data-action="rejected" data-id="${job.id}">
+                Rejected
+            </button>
+            </div>
+        </div>
+
+        <button class="delete-btn shrink-0 rounded-md border border-slate-200 bg-white p-2 text-slate-500 hover:bg-slate-50"
+            data-action="delete" data-id="${job.id}" title="Delete">
+            🗑️
+        </button>
+        </div>
+    </article>
+    `;
+}
 
 
 
