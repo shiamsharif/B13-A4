@@ -40,7 +40,15 @@ function getCounts() {
     return { total: jobs.length, interview: interview, rejected: rejected };
 }
 
+function getFilteredJobs() {
+    if (activeTab === "all") return jobs;
 
+    var result = [];
+    for (var i = 0; i < jobs.length; i++) {
+    if (jobs[i].status === activeTab) result.push(jobs[i]);
+    }
+    return result;
+}
 
 
 
