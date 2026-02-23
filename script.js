@@ -105,6 +105,52 @@ function makeCard(job) {
     `;
 }
 
+function updateDashboardAndList() {
+    // Update dashboard counts
+    var c = getCounts();
+    countTotal.innerText = c.total;
+    countInterview.innerText = c.interview;
+    countRejected.innerText = c.rejected;
 
+    // Update tab count (right side)
+    var filtered = getFilteredJobs();
+    tabCount.innerText = filtered.length;
+
+    // Show empty state only in Interview/Rejected if no jobs
+    if (activeTab !== "all" && filtered.length === 0) {
+    cardsWrap.innerHTML = "";
+    emptyState.classList.remove("hidden");
+    } else {
+    emptyState.classList.add("hidden");
+    var html = "";
+    for (var i = 0; i < filtered.length; i++) {
+        html += makeCard(filtered[i]);
+    }
+    cardsWrap.innerHTML = html;
+    }
+}
+
+function changeTab(tabName) {
+    activeTab = tabName;
+
+    // subtitle update
+    if (tabName === "all") pageSubtitle.innerText = "Home";
+    if (tabName === "interview") pageSubtitle.innerText = "Interview - No Jobs Available";
+    if (tabName === "rejected") pageSubtitle.innerText = "Rejected - No Jobs Available";
+
+    // update active tab UI
+    for (var i = 0; i < tabButtons.length; i++) {
+    var btn = tabButtons[i];
+    var isActive = btn.getAttribute("data-tab") === tabName;
+
+    if (isActive) {
+        btn.className = "tab-btn rounded-md bg-blue-600 px-3 py-1.5 test-base font-semibold text-white";
+    } else {
+        btn.className = "tab-btn rounded-md bg-slate-100 px-3 py-1.5 test-base font-semibold text-slate-700 hover:bg-slate-200";
+    }
+    }
+
+    updateDashboardAndList();
+}
 
 
