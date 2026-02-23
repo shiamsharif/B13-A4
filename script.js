@@ -10,7 +10,7 @@ var jobs = [
     { id: "j8", companyName: "OpsPilot", position: "DevOps Engineer", location: "Berlin, DE", type: "Full-time", salary: "€85,000 - €120,000", description: "Improve CI/CD pipelines and help teams deploy safely and faster.", status: "none" }
 ];
 
-// DOM Elements
+// ---------------------------
 var pageSubtitle = document.getElementById("pageSubtitle");
 var cardsWrap = document.getElementById("cardsWrap");
 var emptyState = document.getElementById("emptyState");
@@ -25,6 +25,25 @@ var tabButtons = document.getElementsByClassName("tab-btn");
 
 
 var activeTab = "all"; // all | interview | rejected
+
+
+
+function getCounts() {
+    var interview = 0;
+    var rejected = 0;
+
+    for (var i = 0; i < jobs.length; i++) {
+    if (jobs[i].status === "interview") interview++;
+    if (jobs[i].status === "rejected") rejected++;
+    }
+
+    return { total: jobs.length, interview: interview, rejected: rejected };
+}
+
+
+
+
+
 
 
 
